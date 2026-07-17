@@ -23,11 +23,11 @@ body {
 }
 
 button {
-    padding: 10px 20px;
+    padding: 12px 25px;
     margin: 10px;
     font-size: 18px;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
 }
 
@@ -63,14 +63,20 @@ button {
 }
 
 h1 {
-    font-size: 42px;
+    font-size: 45px;
+}
+
+/* BIGGER QUOTE 💖 */
+#quote {
+    font-size: 26px;
+    margin-top: 15px;
+    line-height: 1.6;
 }
 
 /* HEARTS */
 .heart {
     position: absolute;
     color: pink;
-    font-size: 20px;
     animation: float 5s linear infinite;
 }
 
@@ -78,20 +84,17 @@ h1 {
     0% { transform: translateY(0); opacity: 1; }
     100% { transform: translateY(-100vh); opacity: 0; }
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- QUESTION -->
 <div id="question">
     <h1>Will you be my forever? ❤️</h1>
     <button id="yes" onclick="showPage()">YES 💖</button>
     <button id="no">NO 😜</button>
 </div>
 
-<!-- MAIN -->
 <div id="main">
     <img src="photo.jpg">
 
@@ -101,19 +104,19 @@ h1 {
     </div>
 </div>
 
-<audio id="music" autoplay loop>
+<audio id="music" loop>
     <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-// NO ESCAPE 😄
+// NO ESCAPE
 const noBtn = document.getElementById("no");
 noBtn.addEventListener("mouseover", () => {
     noBtn.style.top = Math.random() * 80 + "%";
     noBtn.style.left = Math.random() * 80 + "%";
 });
 
-// SHOW PAGE
+// YES CLICK
 function showPage() {
     document.getElementById("question").style.display = "none";
     document.getElementById("main").style.display = "block";
@@ -122,12 +125,12 @@ function showPage() {
     document.getElementById("music").play();
 }
 
-// TYPING EFFECT 💖
+// TYPING
 const text = "You're the only one I want to annoy for the rest of my life ❤️";
 let i = 0;
 
 function startTyping() {
-    let speed = 50;
+    let speed = 40;
     function type() {
         if (i < text.length) {
             document.getElementById("quote").innerHTML += text.charAt(i);
@@ -138,14 +141,14 @@ function startTyping() {
     type();
 }
 
-// HEARTS ANIMATION 💕
+// HEARTS
 function startHearts() {
     setInterval(() => {
         let heart = document.createElement("div");
         heart.innerHTML = "❤️";
         heart.className = "heart";
         heart.style.left = Math.random() * 100 + "vw";
-        heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+        heart.style.fontSize = (Math.random() * 25 + 15) + "px";
         document.body.appendChild(heart);
 
         setTimeout(() => {
