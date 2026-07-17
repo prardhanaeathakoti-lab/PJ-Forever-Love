@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For You ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    text-align: center;
+    background: black;
+    color: white;
+    overflow: hidden;
+}
+
+/* QUESTION */
+#question {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#yes {
+    background: #22c55e;
+}
+
+#no {
+    background: #ef4444;
+    position: absolute;
+}
+
+/* MAIN */
+#main {
+    display: none;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+#main img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(60%);
+}
+
+.text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+h1 {
+    font-size: 42px;
+}
+
+/* HEARTS */
+.heart {
+    position: absolute;
+    color: pink;
+    font-size: 20px;
+    animation: float 5s linear infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-100vh); opacity: 0; }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- QUESTION -->
+<div id="question">
+    <h1>Will you be my forever? ❤️</h1>
+    <button id="yes" onclick="showPage()">YES 💖</button>
+    <button id="no">NO 😜</button>
+</div>
+
+<!-- MAIN -->
+<div id="main">
+    <img src="photo.jpg">
+
+    <div class="text">
+        <h1>Happy Anniversary My Love ❤️</h1>
+        <p id="quote"></p>
+    </div>
+</div>
+
+<audio id="music" autoplay loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// NO ESCAPE 😄
+const noBtn = document.getElementById("no");
+noBtn.addEventListener("mouseover", () => {
+    noBtn.style.top = Math.random() * 80 + "%";
+    noBtn.style.left = Math.random() * 80 + "%";
+});
+
+// SHOW PAGE
+function showPage() {
+    document.getElementById("question").style.display = "none";
+    document.getElementById("main").style.display = "block";
+    startTyping();
+    startHearts();
+    document.getElementById("music").play();
+}
+
+// TYPING EFFECT 💖
+const text = "You're the only one I want to annoy for the rest of my life ❤️";
+let i = 0;
+
+function startTyping() {
+    let speed = 50;
+    function type() {
+        if (i < text.length) {
+            document.getElementById("quote").innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+        }
+    }
+    type();
+}
+
+// HEARTS ANIMATION 💕
+function startHearts() {
+    setInterval(() => {
+        let heart = document.createElement("div");
+        heart.innerHTML = "❤️";
+        heart.className = "heart";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 5000);
+    }, 300);
+}
+</script>
+
+</body>
+</html>
