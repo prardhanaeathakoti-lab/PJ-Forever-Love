@@ -9,7 +9,7 @@ body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
     text-align: center;
-    background:#ffb6c1;
+    background:rgba(0,0,0,0.4);
     color: white;
     overflow: hidden;
 }
@@ -23,11 +23,11 @@ body {
 }
 
 button {
-    padding: 15px 25px;
+    padding: 10px 20px;
     margin: 10px;
     font-size: 18px;
     border: none;
-    border-radius: 20px;
+    border-radius:10px;
     cursor: pointer;
 }
 
@@ -110,6 +110,52 @@ h1 {
 <audio id="music" loop>
     <source src="music.mp3" type="audio/mpeg">
 </audio>
+    <script>
+
+const noMessages = [
+  "Don't do this to me 💔",
+  "Give it another thought 🥺",
+  "Surely not… this could be a mistake 😭"
+];
+
+let i = 0;
+
+function moveNoButton() {
+  alert(noMessages[i % noMessages.length]);
+  i++;
+
+  const btn = document.getElementById("no");
+  btn.style.position = "absolute";
+  btn.style.top = Math.random() * 80 + "%";
+  btn.style.left = Math.random() * 80 + "%";
+}
+
+function showPage() {
+  document.getElementById("main").style.display = "block";
+  document.getElementById("question").style.display = "none";
+
+  startHearts(); // 💖 animation start
+}
+
+function startHearts() {
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.innerHTML = "❤️";
+    heart.style.position = "fixed";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.top = "-10px";
+    heart.style.fontSize = "24px";
+    heart.style.animation = "fall 3s linear";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 3000);
+  }, 300);
+}
+
+</script>
 
 <script>
 // NO ESCAPE
