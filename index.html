@@ -14,7 +14,6 @@ body {
     overflow: hidden;
 }
 
-/* QUESTION */
 #question {
     position: absolute;
     top: 50%;
@@ -39,7 +38,6 @@ button {
     background: #ef4444;
 }
 
-/* MAIN */
 #main {
     display: none;
     width: 100%;
@@ -54,7 +52,6 @@ button {
     filter: brightness(60%);
 }
 
-/* TEXT */
 .text {
     position: absolute;
     bottom: 20%;
@@ -76,7 +73,6 @@ button {
     line-height: 1.6;
 }
 
-/* ❤️ FALLING HEARTS */
 @keyframes fall {
   to {
     transform: translateY(100vh);
@@ -108,26 +104,13 @@ button {
 
 <script>
 
-// 💔 NO BUTTON MESSAGES
-const noMessages = [
-  "Don't do this to me 💔",
-  "Give it another thought 🥺",
-  "Surely not… this could be a mistake 😭"
-];
-
-let msgIndex = 0;
-
 function moveNoButton() {
-  alert(noMessages[msgIndex % noMessages.length]);
-  msgIndex++;
-
   const btn = document.getElementById("no");
   btn.style.position = "absolute";
   btn.style.top = Math.random() * 80 + "%";
   btn.style.left = Math.random() * 80 + "%";
 }
 
-// ✅ YES CLICK
 function showPage() {
   document.getElementById("question").style.display = "none";
   document.getElementById("main").style.display = "block";
@@ -139,7 +122,6 @@ function showPage() {
   music.play().catch(() => {});
 }
 
-// ✍️ TYPING EFFECT
 const text = "You're the only one I want to annoy for the rest of my life ❤️";
 let i = 0;
 
@@ -155,7 +137,6 @@ function startTyping() {
   type();
 }
 
-// ❤️ FALLING HEARTS ANIMATION
 function startHearts() {
   setInterval(() => {
     const heart = document.createElement("div");
