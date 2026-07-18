@@ -9,7 +9,7 @@ body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
     text-align: center;
-    background:rgba(0,0,0,0.4);
+    background: rgba(0,0,0,0.4);
     color: white;
     overflow: hidden;
 }
@@ -37,7 +37,6 @@ button {
 
 #no {
     background: #ef4444;
-    position: absolute;
 }
 
 /* MAIN */
@@ -55,37 +54,34 @@ button {
     filter: brightness(60%);
 }
 
+/* TEXT */
 .text {
     position: absolute;
     bottom: 20%;
-    left:50%
+    left: 50%;
     transform: translateX(-50%);
     width: 100%;
-    text-aline:center
+    text-align: center;
     font-weight: bold;
     text-shadow: 2px 2px 10px black;
+}
 
-h1 {
+.text h1 {
     font-size: 45px;
 }
 
-/* BIGGER QUOTE 💖 */
 #quote {
     font-size: 40px;
     margin-top: 15px;
     line-height: 1.6;
 }
 
-/* HEARTS */
-.heart {
-    position: absolute;
-    color: pink;
-    animation: float 5s linear infinite;
-}
-
-@keyframes float {
-    0% { transform: translateY(0); opacity: 1; }
-    100% { transform: translateY(-100vh); opacity: 0; }
+/* ❤️ FALLING HEARTS */
+@keyframes fall {
+  to {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
 }
 </style>
 </head>
@@ -95,12 +91,11 @@ h1 {
 <div id="question">
     <h1>Will you be my forever? ❤️</h1>
     <button id="yes" onclick="showPage()">YES 💖</button>
-    <button id="no">NO 😜</button>
+    <button id="no" onclick="moveNoButton()">NO 😜</button>
 </div>
 
 <div id="main">
     <img src="photo.jpg">
-
     <div class="text">
         <h1>Happy Anniversary My Love ❤️</h1>
         <p id="quote"></p>
@@ -112,53 +107,73 @@ h1 {
 </audio>
 
 <script>
-// NO ESCAPE
-const noBtn = document.getElementById("no");
-noBtn.addEventListener("mouseover", () => {
-    noBtn.style.top = Math.random() * 80 + "%";
-    noBtn.style.left = Math.random() * 80 + "%";
-});
 
-// YES CLICK
-function showPage() {
-    document.getElementById("question").style.display = "none";
-    document.getElementById("main").style.display = "block";
-    startTyping();
-    startHearts();
-    document.getElementById("music").play();
+// 💔 NO BUTTON MESSAGES
+const noMessages = [
+  "Don't do this to me 💔",
+  "Give it another thought 🥺",
+  "Surely not… this could be a mistake 😭"
+];
+
+let msgIndex = 0;
+
+function moveNoButton() {
+  alert(noMessages[msgIndex % noMessages.length]);
+  msgIndex++;
+
+  const btn = document.getElementById("no");
+  btn.style.position = "absolute";
+  btn.style.top = Math.random() * 80 + "%";
+  btn.style.left = Math.random() * 80 + "%";
 }
 
-// TYPING
+// ✅ YES CLICK
+function showPage() {
+  document.getElementById("question").style.display = "none";
+  document.getElementById("main").style.display = "block";
+
+  startTyping();
+  startHearts();
+
+  let music = document.getElementById("music");
+  music.play().catch(() => {});
+}
+
+// ✍️ TYPING EFFECT
 const text = "You're the only one I want to annoy for the rest of my life ❤️";
 let i = 0;
 
 function startTyping() {
-    let speed = 40;
-    function type() {
-        if (i < text.length) {
-            document.getElementById("quote").innerHTML += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-        }
+  let speed = 40;
+  function type() {
+    if (i < text.length) {
+      document.getElementById("quote").innerHTML += text.charAt(i);
+      i++;
+      setTimeout(type, speed);
     }
-    type();
+  }
+  type();
 }
 
-// HEARTS
+// ❤️ FALLING HEARTS ANIMATION
 function startHearts() {
-    setInterval(() => {
-        let heart = document.createElement("div");
-        heart.innerHTML = "❤️";
-        heart.className = "heart";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.fontSize = (Math.random() * 25 + 15) + "px";
-        document.body.appendChild(heart);
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.innerHTML = "❤️";
+    heart.style.position = "fixed";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.top = "-10px";
+    heart.style.fontSize = (Math.random() * 20 + 20) + "px";
+    heart.style.animation = "fall 3s linear";
 
-        setTimeout(() => { 
-            heart.remove();
-        }, 5000);
-    }, 300);
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 3000);
+  }, 300);
 }
+
 </script>
 
 </body>
