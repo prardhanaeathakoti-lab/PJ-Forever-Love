@@ -84,6 +84,21 @@ function showPage() {
 
     document.getElementById("music").play();
 }
+    
+    const text = "You're the only one I want to annoy for the rest of my life ❤️";
+let i = 0;
+
+function startTyping() {
+  let speed = 40;
+  function type() {
+    if (i < text.length) {
+      document.getElementById("quote").innerHTML += text.charAt(i);
+      i++;
+      setTimeout(type, speed);
+    }
+  }
+  type();
+}
 
 </script>
 
